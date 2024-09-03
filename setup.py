@@ -8,7 +8,6 @@ dependencies = [
     "langchain>=0.0.206",
     "plotly>=5.15.0",
     "textacy>=0.13.0",
-    "gensim>=4.3.1",
     "sentence-transformers>=2.7.0",
     "openai>=0.28.0",
     "python-dotenv>=1.0.0",
