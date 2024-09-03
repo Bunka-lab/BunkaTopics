@@ -83,7 +83,7 @@ class Bunka:
 
     def __init__(
         self,
-        embedding_model: Embeddings = None,
+        embedding_model: t.Optional[Embeddings|SentenceTransformer],
         projection_model=None,
         language: str = "english",  # will be removed in the future
     ):
@@ -119,13 +119,13 @@ class Bunka:
     def fit(
         self,
         docs: t.List[str],
-        ids: t.List[DOC_ID] = None,
+        ids: t.Optional[t.List[DOC_ID]],
         pre_computed_embeddings: t.Optional[
             t.List[t.Dict[DOC_ID, t.List[float]]]
-        ] = None,
-        metadata: t.Optional[t.List[dict]] = None,
+        ],
+        metadata: t.Optional[t.List[dict]],
+        language: t.Optional[str],
         sampling_size_for_terms: t.Optional[int] = 1000,
-        language: bool = None,
     ) -> None:
         """
         Fits the Bunka model to the provided list of documents.
@@ -359,7 +359,7 @@ class Bunka:
         min_count_terms: int = 2,
         ranking_terms: int = 20,
         max_doc_per_topic: int = 100,
-        custom_clustering_model: bool = None,
+        custom_clustering_model = None,
         min_docs_per_cluster: int = 1,
     ) -> pd.DataFrame:
         """
