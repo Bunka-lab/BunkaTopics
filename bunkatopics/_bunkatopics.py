@@ -121,7 +121,7 @@ class Bunka:
         docs: t.List[str],
         ids: t.Optional[t.List[DOC_ID]],
         pre_computed_embeddings: t.Optional[
-            t.List[t.Dict[DOC_ID, t.List[float]]]
+            t.List[np.ndarray]
         ],
         metadata: t.Optional[t.List[dict]],
         language: t.Optional[str],
@@ -214,16 +214,16 @@ class Bunka:
                 bunka_embeddings = self.embedding_model.encode(
                     sentences
                 )  # show_progress_bar=True
-        else:
-            pre_computed_embeddings.sort(key=lambda x: ids.index(x["doc_id"]))
-            # bunka_embeddings = [x["embedding"] for x in pre_computed_embeddings]
-            bunka_embeddings = []
-            for x in pre_computed_embeddings:
-                embedding = x["embedding"]
-                if isinstance(embedding, list):
-                    bunka_embeddings.append(embedding)
-                else:
-                    bunka_embeddings.append(embedding.tolist())
+        # else:
+        #     pre_computed_embeddings.sort(key=lambda x: ids.index(x["doc_id"]))
+        #     # bunka_embeddings = [x["embedding"] for x in pre_computed_embeddings]
+        #     bunka_embeddings = []
+        #     for x in pre_computed_embeddings:
+        #         embedding = x["embedding"]
+        #         if isinstance(embedding, list):
+        #             bunka_embeddings.append(embedding)
+        #         else:
+        #             bunka_embeddings.append(embedding.tolist())
 
         # Add to the bunka objects
         emb_doc_dict = {x: y for x, y in zip(ids, bunka_embeddings)}
